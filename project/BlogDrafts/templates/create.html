@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Create Blog | The Daily Draft
+{% endblock title %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto px-6 py-12">
+
+  <!-- Heading -->
+  <div class="text-center mb-10">
+    <h1 class="text-4xl font-bold text-foreground">
+      Create New Blog
+    </h1>
+    <p class="text-muted-foreground-2 mt-2">
+      Share your ideas with the world through The Daily Draft
+    </p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="bg-layer border border-layer-line rounded-xl shadow-sm p-8">
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="grid gap-6">
+
+        <!-- Blog Title -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-foreground">
+            Blog Title
+          </label>
+          <input 
+            type="text"
+            name="title"
+            placeholder="Enter blog title..."
+            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            required
+          >
+        </div>
+
+        <!-- Category + Website -->
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <div>
+            <label class="block mb-2 text-sm font-medium text-foreground">
+              Category
+            </label>
+            <input 
+              type="text"
+              name="category"
+              placeholder="Technology, Travel..."
+              class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            >
+          </div>
+
+          <div>
+            <label class="block mb-2 text-sm font-medium text-foreground">
+              Author Website
+            </label>
+            <input 
+              type="url"
+              name="website"
+              placeholder="https://example.com"
+              class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+            >
+          </div>
+
+        </div>
+
+        <!-- Blog Description -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-foreground">
+            Blog Content
+          </label>
+
+          <textarea
+            name="content"
+            rows="6"
+            placeholder="Write your blog content here..."
+            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
+          ></textarea>
+        </div>
+
+        <!-- Thumbnail Upload -->
+        <div>
+          <label class="block mb-2 text-sm font-medium text-foreground">
+            Blog Thumbnail
+          </label>
+
+          <div class="border-2 border-dashed border-layer-line rounded-lg p-6 text-center hover:border-primary transition">
+
+            <input 
+              type="file"
+              name="thumbnail"
+              accept="image/*"
+              class="block w-full text-sm text-muted-foreground-1"
+            >
+
+            <p class="text-xs text-muted-foreground-2 mt-2">
+              PNG, JPG up to 5MB
+            </p>
+
+          </div>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="flex items-start gap-3">
+          <input 
+            type="checkbox"
+            required
+            class="mt-1 size-4 border border-layer-line rounded text-primary"
+          >
+          <p class="text-sm text-muted-foreground-2">
+            I confirm this content follows the
+            <a href="#" class="text-primary hover:underline">community guidelines</a>
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full py-3 text-sm font-semibold rounded-lg bg-blue-600 text-primary-foreground hover:bg-primary-hover transition"
+        >
+          Publish Blog
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock content %}
