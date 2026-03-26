@@ -36,8 +36,7 @@ def Login(request):
         password = request.POST.get('password')
 
         if not username or not password:
-            messages.error(request, 'All fields are required')
-            return redirect('login')
+            return messages.error(request, 'All fields are required')
         
         user = authenticate(request, username=username, password=password)
         if user is not None:

@@ -7,6 +7,10 @@ Create Blog | The Daily Draft
 
 {% block content %}
 
+  {% if user.is_superuser %}
+    {% include "category.html" %}
+  {% endif %}
+
 <div class="max-w-4xl mx-auto px-6 py-12">
 
   <!-- Heading -->
@@ -48,22 +52,30 @@ Create Blog | The Daily Draft
             <label class="block mb-2 text-sm font-medium text-foreground">
               Category
             </label>
-            <input 
-              type="text"
+
+            <select 
               name="category"
-              placeholder="Technology, Travel..."
               class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
             >
+              <option value="">Select Category</option>
+
+              {% for category in data %}
+                <option value="{{ category.id }}">
+                  {{ category.name }}
+                </option>
+              {% endfor %}
+
+            </select>
           </div>
 
           <div>
             <label class="block mb-2 text-sm font-medium text-foreground">
-              Author Website
+              Blog Slug
             </label>
             <input 
-              type="url"
-              name="website"
-              placeholder="https://example.com"
+              type="text"
+              name="slug"
+              placeholder="slug_example"
               class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
             >
           </div>
@@ -106,23 +118,25 @@ Create Blog | The Daily Draft
           </div>
         </div>
 
-        <!-- Checkbox -->
-        <div class="flex items-start gap-3">
-          <input 
-            type="checkbox"
-            required
-            class="mt-1 size-4 border border-layer-line rounded text-primary"
+        <div>
+          <label class="block mb-2 text-sm font-medium text-foreground">
+            Visibility
+          </label>
+
+          <select 
+            name="visibility"
+            class="w-full py-3 px-4 rounded-lg border border-layer-line bg-layer text-foreground focus:border-primary-focus focus:ring-primary-focus"
           >
-          <p class="text-sm text-muted-foreground-2">
-            I confirm this content follows the
-            <a href="#" class="text-primary hover:underline">community guidelines</a>
-          </p>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
         </div>
 
         <!-- Submit Button -->
         <button
           type="submit"
-          class="w-full py-3 text-sm font-semibold rounded-lg bg-blue-600 text-primary-foreground hover:bg-primary-hover transition"
+          name="add_blog"
+          class="w-full py-3 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-primary-hover transition"
         >
           Publish Blog
         </button>
